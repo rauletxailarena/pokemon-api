@@ -109,11 +109,7 @@ var setPokemonImage = function(pokemonObject, pokemon){
   pokemonImage.src = imageUrl;
 }
 
-var clearPokemonImage = function() {
-  var pokemonInfoDiv = document.querySelector("#pokemon-info");
-  while (pokemonInfoDiv.hasChildNodes()){
-    pokemonInfoDiv.removeChild(pokemonInfoDiv.lastChild);
-  }
-}
+
+
 
 window.addEventListener("load", app);

@@ -2,4 +2,27 @@ img {
   height: 200px;
   width: 200px;
   image-rendering: pixelated;
+  border: none;
+  outline: none;
+}
+
+h1{
+  text-align: center;
+  }
+
+
+#select-div{
+  /*background-color: green;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 40px;
+}
+
+#pokemon-info{
+  /*background-color: green;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 40px;
 }
