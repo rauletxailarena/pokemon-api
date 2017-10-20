@@ -33,7 +33,8 @@ var addEventListenerToSelec = function(){
   var select = document.querySelector("#pokemon-select");
   select.addEventListener("change", function(){
     var pokemonName = this.value
-    console.log("pokemon name:", pokemonName);
+    pokemon1.name = pokemonName
+    console.log("pokemon 1 name:", pokemon1.name);
     makePokemonRequest(pokemonName);
   })
 }
@@ -55,7 +56,8 @@ var getPokemonAttacksArray = function(pokemonObject){
     var move = pokemonObject.moves[Math.floor(Math.random() * pokemonObject.moves.length)].move;
     attacksArray.push(move);
   }
-  console.log("selected pokemon attacks:", attacksArray);
+  pokemon1.attacks = attacksArray
+  console.log("Pokemon 1 attacks:", pokemon1.attacks);
 }
 
 var makePokemonRequest = function(pokemonName){
@@ -66,9 +68,26 @@ var makePokemonRequest = function(pokemonName){
   request.addEventListener('load', function(){
     var pokemonObject = JSON.parse(this.responseText);
     console.log("Pokemon object:", pokemonObject);
+    setPokemonImage(pokemonObject);
     getPokemonHP(pokemonObject);
     getPokemonAttacksArray(pokemonObject);
   });
+}
+
+var setPokemonImage = function(pokemonObject, position){
+  clearPokemonImage();
+  var pokemonInfoDiv = document.querySelector("#pokemon-info");
+  var ImageUrl = pokemonObject.sprites.front_default
+  var pokemonImage = document.createElement("img");
+  pokemonImage.src = ImageUrl;
+  pokemonInfoDiv.appendChild(pokemonImage);
+}
+
+var clearPokemonImage = function() {
+  var pokemonInfoDiv = document.querySelector("#pokemon-info");
+  while (pokemonInfoDiv.hasChildNodes()){
+    pokemonInfoDiv.removeChild(pokemonInfoDiv.lastChild);
+  }
 }
 
 window.addEventListener("load", app);
