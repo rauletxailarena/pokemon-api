@@ -1,9 +1,9 @@
 var app = function () {
   console.log("app being called")
-  makeRequest();
+  makeInitialRequest();
 }
 
-var makeRequest = function (){
+var makeInitialRequest = function (){
   url = "https://pokeapi.co/api/v2/pokemon/?limit=151"
 
   var request = new XMLHttpRequest();
@@ -11,15 +11,10 @@ var makeRequest = function (){
   request.send();
   request.addEventListener('load', function(){
     var pokemons = JSON.parse(this.responseText);
-    console.log(pokemons);
-  })
-
-  request.open("GET", url);
-  request.send();
-  request.addEventListener('load', function(){
-    var beers = JSON.parse(this.responseText)
-    console.log(beers)
-    render(beers);
+    var listOfPokemons = pokemons["results"];
+    var pokemonObjects
+    // pokemonNames = pokemons.count;
+    console.dir(listOfPokemons);
   });
 }
 
