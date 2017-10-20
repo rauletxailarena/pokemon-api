@@ -6,6 +6,7 @@ var app = function () {
   console.log("app being called")
   makeInitialRequest();
   addEventListenerToSelects();
+  addEventListenerToButton();
 }
 
 var makeInitialRequest = function (){
@@ -63,6 +64,7 @@ var getPokemonHP = function(pokemonObject, pokemon){
   hp = item.base_stat;
   pokemon.hp = hp;
   console.log("pokemon hp:", pokemon.hp);
+  displayPokemonHP(pokemon);
 }
 
 var getPokemonAttacksArray = function(pokemonObject, pokemon){
@@ -109,6 +111,30 @@ var setPokemonImage = function(pokemonObject, pokemon){
   pokemonImage.src = imageUrl;
 }
 
+var addEventListenerToButton = function(){
+  var button = document.querySelector("#fight-button");
+  button.addEventListener('click', function(){
+    console.log("Button pressed");
+    document.querySelector("#pokemon-1-picture").classList.add("shakeImage");
+    document.querySelector("#pokemon-2-picture").classList.add("shakeImage");
+    var audio = new Audio("music.m4a")
+    audio.play();
+    setTimeout(function(){
+      document.querySelector("#pokemon-1-picture").classList.remove("shakeImage");
+      document.querySelector("#pokemon-2-picture").classList.remove("shakeImage");
+    }, 5000);
+  })
+}
+
+var displayPokemonHP = function(pokemon){
+  var pokemonHP;
+  if (pokemon === pokemon1){
+    pokemonHP = document.querySelector("#pokemon-1-hp");
+  } else {
+    pokemonHP = document.querySelector("#pokemon-2-hp");
+  }
+  pokemonHP.textContent = "HP: " + pokemon.hp;
+}
 
 
 
