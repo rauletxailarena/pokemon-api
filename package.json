@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/rauletxailarena/pokemon-api#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "mocha": "^4.0.1"
   }
 }
