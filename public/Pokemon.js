@@ -13,4 +13,4 @@ Pokemon.prototype.isDown = function(){
   return false;
 }
 
-module.exports = Pokemon
+// module.exports = Pokemon;
