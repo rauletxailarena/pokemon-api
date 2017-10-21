@@ -6,6 +6,9 @@ var Pokemon = function(){
 
 Pokemon.prototype.takeDamage = function(damage){
   this.hp -= damage;
+  if (this.hp < 0){
+    this.hp = 0;
+  }
 }
 
 Pokemon.prototype.isDown = function(){

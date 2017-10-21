@@ -2,6 +2,7 @@ var pokemonObjects;
 var pokemon1 = new Pokemon();
 var pokemon2 = new Pokemon();
 var currentPokemon = pokemon2;
+var audio;
 
 var app = function () {
   console.log("app being called")
@@ -122,7 +123,7 @@ var addEventListenerToButton = function(){
     };
     document.querySelector("#pokemon-1-picture").classList.add("shakeImage");
     document.querySelector("#pokemon-2-picture").classList.add("shakeImage");
-    var audio = new Audio("music.m4a")
+    audio = new Audio("music.m4a")
     audio.play();
     setTimeout(function(){
       document.querySelector("#pokemon-1-picture").classList.remove("shakeImage");
@@ -143,7 +144,12 @@ var displayPokemonHP = function(pokemon){
 }
 
 var startFight = function(){
-  console.log("START FIGHT");
+  if (getPokemonToAttack().hp === 0){
+    var combatInfo = document.querySelector("#combat-info");
+    combatInfo.textContent = getPokemonToAttack().name + " IS DEAD!"
+    audio.pause();
+    return;
+  }
   if (currentPokemon === pokemon1){
     currentPokemon = pokemon2;
   } else {
@@ -175,13 +181,13 @@ var tryAttack = function (currentPokemon){
 }
 
 var displayAttack = function(moveName, movePP) {
-  attackerName = currentPokemon.name;
-  attackedName = getPokemonToAttack().name;
+  attackerName = currentPokemon.name.toUpperCase();
+  attackedName = getPokemonToAttack().name.toUpperCase();
   attackedHP = getPokemonToAttack().hp
-  console.log(attackerName + " attacked " + attackedName + " using " + moveName);
-  console.log(attackedName + "'s HP went down to " + attackedHP);
   var combatInfo = document.querySelector("#combat-info");
-  combatInfo.textContent = attackerName + " attacked " + attackedName + " using " + moveName 
+  combatInfo.textContent = attackerName + " attacked " + attackedName + " using " + moveName + "\n" + attackedName + "'s HP went down to " + attackedHP;
+  var attackedPokemon  = getPokemonToAttack();
+  updateImageHP(attackedPokemon);
 };
 
 var getPokemonToAttack = function(){
@@ -190,6 +196,16 @@ var getPokemonToAttack = function(){
   } else {
     return pokemon1;
   }
+}
+
+var updateImageHP = function(attackedPokemon){
+  var hpElement;
+  if (attackedPokemon === pokemon1){
+    hpElement = document.querySelector("#pokemon-1-hp");
+  } else {
+    hpElement = document.querySelector("#pokemon-2-hp");
+  }
+  hpElement.textContent = "HP: " + attackedPokemon.hp;
 }
 
 window.addEventListener("load", app);

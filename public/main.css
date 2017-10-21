@@ -38,7 +38,7 @@ select{
   justify-content: space-around;
   /*height: 40px;*/
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   border: 1px solid;
 }
 
@@ -48,7 +48,8 @@ select{
 }
 
 .single-pokemon-info{
-  width: 80%;
+  /*width: 80%;*/
+
   align-items: center;
   border: 1px solid;
   display: flex;
