@@ -1,6 +1,7 @@
 var pokemonObjects;
 var pokemon1 = new Pokemon();
 var pokemon2 = new Pokemon();
+var currentPokemon = pokemon2;
 
 var app = function () {
   console.log("app being called")
@@ -73,8 +74,8 @@ var getPokemonAttacksArray = function(pokemonObject, pokemon){
     var move = pokemonObject.moves[Math.floor(Math.random() * pokemonObject.moves.length)].move;
     attacksArray.push(move);
   }
-  pokemon.attacks = attacksArray
-  console.log("Pokemon attacks:", pokemon.attacks);
+  pokemon.moves = attacksArray
+  console.log("Pokemon attacks:", pokemon.moves);
 }
 
 var makePokemonRequest = function(pokemonName, pokemon){
@@ -115,6 +116,10 @@ var addEventListenerToButton = function(){
   var button = document.querySelector("#fight-button");
   button.addEventListener('click', function(){
     console.log("Button pressed");
+    if (pokemon1.moves === undefined || pokemon2.moves === undefined){
+      console.log("Select two pokemons to battle!")
+      return;
+    };
     document.querySelector("#pokemon-1-picture").classList.add("shakeImage");
     document.querySelector("#pokemon-2-picture").classList.add("shakeImage");
     var audio = new Audio("music.m4a")
@@ -123,7 +128,7 @@ var addEventListenerToButton = function(){
       document.querySelector("#pokemon-1-picture").classList.remove("shakeImage");
       document.querySelector("#pokemon-2-picture").classList.remove("shakeImage");
       startFight();
-    }, 5000);
+    }, 4000);
   })
 }
 
@@ -139,8 +144,52 @@ var displayPokemonHP = function(pokemon){
 
 var startFight = function(){
   console.log("START FIGHT");
+  if (currentPokemon === pokemon1){
+    currentPokemon = pokemon2;
+  } else {
+    currentPokemon = pokemon1
+  }
+  tryAttack(currentPokemon);
 }
 
+var tryAttack = function (currentPokemon){
+  var move = currentPokemon.moves[Math.floor(Math.random() * currentPokemon.moves.length)];
+  var url = move.url;
+  console.log("Requestiong move...", url);
+  var request = new XMLHttpRequest();
+  request.open("GET", url)
+  request.send();
+  request.addEventListener('load', function(){
+    console.log("Move loaded:", JSON.parse(this.responseText));
+    var moveInfo = JSON.parse(this.responseText);
+    var moveName = move.name;
+    var movePP = moveInfo.pp;
+    var pokemonToAttack = getPokemonToAttack();
+    currentPokemon.attack(pokemonToAttack, movePP);
+    console.log("Move name and pp:", moveName, movePP);
+    displayAttack(moveName, movePP);
+    setTimeout(function () {
+    startFight();
+  },3000);
+  });
+}
 
+var displayAttack = function(moveName, movePP) {
+  attackerName = currentPokemon.name;
+  attackedName = getPokemonToAttack().name;
+  attackedHP = getPokemonToAttack().hp
+  console.log(attackerName + " attacked " + attackedName + " using " + moveName);
+  console.log(attackedName + "'s HP went down to " + attackedHP);
+  var combatInfo = document.querySelector("#combat-info");
+  combatInfo.textContent = attackerName + " attacked " + attackedName + " using " + moveName 
+};
+
+var getPokemonToAttack = function(){
+  if (currentPokemon === pokemon1){
+    return pokemon2;
+  } else {
+    return pokemon1;
+  }
+}
 
 window.addEventListener("load", app);

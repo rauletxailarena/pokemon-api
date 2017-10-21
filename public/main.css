@@ -1,9 +1,10 @@
 img {
-  height: 400px;
-  width: 400px;
+  height: 300px;
+  width: 300px;
   image-rendering: pixelated;
   border: none;
   outline: none;
+  align-self: center;
 }
 
 h1{
@@ -35,12 +36,25 @@ select{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 40px;
+  /*height: 40px;*/
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
 }
 
 .shakeImage {
   animation: shake 0.5s;
   animation-iteration-count: infinite;
+}
+
+.single-pokemon-info{
+  width: 80%;
+  align-items: center;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes shake {
