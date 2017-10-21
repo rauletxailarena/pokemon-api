@@ -13,4 +13,8 @@ Pokemon.prototype.isDown = function(){
   return false;
 }
 
-// module.exports = Pokemon;
+Pokemon.prototype.attack = function(pokemon, pp){
+  pokemon.takeDamage(pp);
+}
+
+module.exports = Pokemon;

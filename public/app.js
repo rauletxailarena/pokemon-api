@@ -97,7 +97,7 @@ var setPokemonImage = function(pokemonObject, pokemon){
   // clearPokemonImage();
   var pokemonImage;
   var imageUrl;
-  console.log("pokemon Number:", pokemon);
+  console.log("pokemon:", pokemon);
   if (pokemon === pokemon1){
     pokemonImage = document.querySelector("#pokemon-1-picture")
     imageUrl =  pokemonObject.sprites.back_default;
@@ -122,6 +122,7 @@ var addEventListenerToButton = function(){
     setTimeout(function(){
       document.querySelector("#pokemon-1-picture").classList.remove("shakeImage");
       document.querySelector("#pokemon-2-picture").classList.remove("shakeImage");
+      startFight();
     }, 5000);
   })
 }
@@ -134,6 +135,10 @@ var displayPokemonHP = function(pokemon){
     pokemonHP = document.querySelector("#pokemon-2-hp");
   }
   pokemonHP.textContent = "HP: " + pokemon.hp;
+}
+
+var startFight = function(){
+  console.log("START FIGHT");
 }
 
 

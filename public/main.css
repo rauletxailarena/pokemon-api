@@ -36,7 +36,6 @@ select{
   flex-direction: row;
   justify-content: space-around;
   height: 40px;
-  background-color: green;
 }
 
 .shakeImage {
