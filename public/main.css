@@ -1,3 +1,6 @@
+body{
+  background-color: #224269;
+}
 img {
   height: 300px;
   width: 300px;
@@ -7,14 +10,34 @@ img {
   align-self: center;
 }
 
+p{
+  /*color: white;*/
+}
+
 h1{
   text-align: center;
-  margin: 40px;
+  font-size: 70px;
+
 }
 
 select{
   margin: 0px 30px 0px 30px;
   width: 100% ;
+}
+
+#header{
+  display: flex;
+  background-color: #00CBFB;
+  height: 150px;
+  margin: 30px 0 30px 0;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  align-self: center;
+  border: 10px solid;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
 }
 
 #fight-button{
@@ -29,17 +52,25 @@ select{
   justify-content: space-around;
   height: 40px;
   margin-bottom: 30px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #pokemon-info{
-  /*background-color: green;*/
+  background-color: #00CBFB;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  /*height: 40px;*/
   align-items: center;
   justify-content: space-around;
-  border: 1px solid;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  border: 10px solid;
+  border-radius: 25px;
+  height: 500px;
 }
 
 .shakeImage {
@@ -48,14 +79,15 @@ select{
 }
 
 .single-pokemon-info{
-  /*width: 80%;*/
-
-  align-items: center;
-  border: 1px solid;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#combat-info{
+  text-align: center;
+  font-size: 20px;
 }
 
 @keyframes shake {

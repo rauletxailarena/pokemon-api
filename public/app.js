@@ -135,12 +135,14 @@ var addEventListenerToButton = function(){
 
 var displayPokemonHP = function(pokemon){
   var pokemonHP;
+  var pokemonPicture;
   if (pokemon === pokemon1){
     pokemonHP = document.querySelector("#pokemon-1-hp");
   } else {
     pokemonHP = document.querySelector("#pokemon-2-hp");
   }
   pokemonHP.textContent = "HP: " + pokemon.hp;
+
 }
 
 var startFight = function(){
@@ -178,14 +180,14 @@ var tryAttack = function (currentPokemon){
     startFight();
   },3000);
   });
-}
+};
 
 var displayAttack = function(moveName, movePP) {
   attackerName = currentPokemon.name.toUpperCase();
   attackedName = getPokemonToAttack().name.toUpperCase();
   attackedHP = getPokemonToAttack().hp
   var combatInfo = document.querySelector("#combat-info");
-  combatInfo.textContent = attackerName + " attacked " + attackedName + " using " + moveName + "\n" + attackedName + "'s HP went down to " + attackedHP;
+  combatInfo.innerHTML = attackerName + " attacked " + attackedName + " using " + moveName + "<br>" + attackedName + "'s HP went down to " + attackedHP;
   var attackedPokemon  = getPokemonToAttack();
   updateImageHP(attackedPokemon);
 };
@@ -196,16 +198,26 @@ var getPokemonToAttack = function(){
   } else {
     return pokemon1;
   }
-}
+};
 
 var updateImageHP = function(attackedPokemon){
   var hpElement;
+  var pokemonPicture;
   if (attackedPokemon === pokemon1){
     hpElement = document.querySelector("#pokemon-1-hp");
+    pokemonPicture = document.querySelector("#pokemon-1-picture");
   } else {
     hpElement = document.querySelector("#pokemon-2-hp");
+    pokemonPicture = document.querySelector("#pokemon-2-picture");
   }
   hpElement.textContent = "HP: " + attackedPokemon.hp;
+  pokemonPicture.classList.add("shakeImage");
+  console.log("pokemonToShake: ", pokemonPicture);
+  console.log("pokemonToShake classes ", pokemonPicture.classList);
+
+  setTimeout(function(){
+    pokemonPicture.classList.remove("shakeImage");
+  }, 2000);
 }
 
 window.addEventListener("load", app);
